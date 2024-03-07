@@ -1,9 +1,10 @@
+
 # We will use the following packages
 
 # NumPy for math operations, and Pandas for processing tabular data.
 import numpy as np
 import pandas as pd
-
+from sklearn.metrics import roc_auc_score
 # Plotly plotting package
 import plotly.graph_objects as go
 import plotly.express as px
@@ -148,7 +149,8 @@ print(BestSVC.best_score_)
 y_pred = BestSVC.predict(X_test)
 print('F1 score on test set: {:.4f}'.format(f1_score(y_test,y_pred)))
 pd.crosstab(y_test,y_pred)
-
+auc_svc = roc_auc_score(y_test, y_pred)
+print("SVM(LEANER) AUC:", auc_svc)
 
 nonlinear_models = {
     'DecisionTree':DTC(criterion='entropy'),
@@ -223,4 +225,3 @@ print("XGBoost AUC:", auc_xgboost)
 y_prob_svc = BestSVC.decision_function(X_test)
 auc_svc = roc_auc_score(y_test, y_prob_svc)
 print("SVC AUC:", auc_svc)
-
